@@ -18,7 +18,8 @@ func TestTerraformEc2PowerUser(t *testing.T) {
 		},
 	})
 	defer terraform.Destroy(t, terraformOptions)
-	terraform.InitAndApply(t, terraformOptions)
+	//terraform.InitAndApply(t, terraformOptions)
+	terraform.InitAndPlanAndShow(t, terraformOptions)
 	ec2PowerUserPolicy := terraform.Output(t, terraformOptions, "ec2_poweruser")
 	assert.Contains(t, "ec2:TerminateInstances", ec2PowerUserPolicy)
 	assert.Contains(t, strings.ToLower("ModifyLaunchTemplate"), strings.ToLower(ec2PowerUserPolicy))
